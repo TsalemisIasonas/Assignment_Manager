@@ -1,3 +1,4 @@
+import 'package:assignment_manager/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -24,7 +25,7 @@ class ToDoTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25, top: 25),
       child: Card(
-        shadowColor: Color.fromARGB(255, 75, 171, 149),
+        shadowColor: shadowColor,
         elevation: 10,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -35,10 +36,10 @@ class ToDoTile extends StatelessWidget {
           child: Container(
             width: 160,  // FIX: set fixed width to avoid infinite width error
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 26, 26, 26),
+              color: tileBackgroundColor,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: const Color.fromARGB(175, 255, 255, 255),
+                color: tileBorderColor,
                 width: 1.0,
               ),
             ),
@@ -48,11 +49,11 @@ class ToDoTile extends StatelessWidget {
                 // Blue title bar on top
                 Container(
                   padding: const EdgeInsets.all(10),
-                  color: Color.fromARGB(255, 11, 111, 88),
+                  color: tileHeaderColor,
                   child: Text(
                     taskTitle,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: textColor,
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
                     ),
@@ -67,7 +68,7 @@ class ToDoTile extends StatelessWidget {
                       SlidableAction(
                         onPressed: deleteFunction,
                         icon: Icons.delete,
-                        backgroundColor: const Color.fromARGB(255, 26, 26, 26),
+                        backgroundColor: tileBackgroundColor,
                         foregroundColor: Colors.red,
                       ),
                     ],
@@ -75,7 +76,7 @@ class ToDoTile extends StatelessWidget {
                   child: Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                    color: const Color.fromARGB(255, 26, 26, 26),
+                    color: tileBackgroundColor,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -90,7 +91,7 @@ class ToDoTile extends StatelessWidget {
                           child: Text(
                             taskContent,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontWeight: FontWeight.w400,
                               decoration: taskCompleted
                                   ? TextDecoration.lineThrough

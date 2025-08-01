@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:assignment_manager/data/database.dart';
+import '../constants/colors.dart';
 
 class MyChart extends StatelessWidget {
   const MyChart({super.key, required this.db,});
@@ -23,14 +24,24 @@ class MyChart extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            Text('${completedPercent.toString()} %', 
+            style: TextStyle(color: textColor, fontSize: 14, fontWeight: FontWeight.w200)),
             PieChart(
               PieChartData(
                 startDegreeOffset: -90,
-                sectionsSpace: 2,
+                sectionsSpace: 0,
                 centerSpaceRadius: 40,
                 sections: [
                   PieChartSectionData(
-                    color: Color.fromARGB(255, 4, 81, 63),
+                    gradient: LinearGradient(
+                      colors: [
+                        gradientColor1,
+                        gradientColor2,
+                        gradientColor3,
+                      ],
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                    ),
                     value: completedPercent,
                     showTitle: false,
                     radius: 30,

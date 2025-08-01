@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../data/database.dart';
 import '../util/dialog_box.dart';
+import '../constants/colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
@@ -106,16 +107,16 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.4,
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 12, 113, 105),
-                    Color.fromARGB(255, 4, 81, 63),
+                    lightGreen,
+                    darkGreen,
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                   topLeft: Radius.circular(5),
@@ -125,12 +126,12 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                   Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Welcome Back",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textColor,
                         letterSpacing: 2,
                         fontSize: 30,
                         fontWeight: FontWeight.w300,
@@ -143,8 +144,8 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       "You have completed ${db.toDoList.where((task) => task.length > 3 && task[3] == true).length} "
                       "out of ${db.toDoList.length} tasks",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: textColor,
                         fontSize: 15,
                         fontWeight: FontWeight.w300,
                       ),
@@ -171,7 +172,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: Container(
                 key: ValueKey<int>(_selectedIndex),
-                color: Colors.black, // Ensures background remains black
+                color: backgroundColor, // Ensures background remains black
                 //padding: const EdgeInsets.only(top: 0),
                 child: _selectedIndex == 0
                     ? buildTasksLayout()
@@ -190,7 +191,7 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.only(left: 40, right: 40),
           height: 55,
           shape: const CircularNotchedRectangle(),
-          color: const Color.fromARGB(255, 4, 71, 55),
+          color: navbarColor,
           child: Row(
             children: [
               IconButton(
@@ -199,10 +200,10 @@ class _HomePageState extends State<HomePage> {
                     _selectedIndex = 0;
                   });
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.home,
                   size: 25,
-                  color: Color.fromARGB(255, 210, 201, 201),
+                  color: navbarIconColor
                 ),
               ),
               const Spacer(),
@@ -212,10 +213,10 @@ class _HomePageState extends State<HomePage> {
                     _selectedIndex = 1;
                   });
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.bar_chart,
                   size: 25,
-                  color: Color.fromARGB(255, 210, 201, 201),
+                  color: navbarIconColor,
                 ),
               ),
             ],
