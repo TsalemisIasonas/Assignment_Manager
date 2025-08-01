@@ -1,9 +1,9 @@
-import 'package:assignment_manager/util/graph.dart';
+import 'package:assignment_manager/widgets/my_chart.dart';
+import 'package:assignment_manager/widgets/tiles_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../data/database.dart';
 import '../util/dialog_box.dart';
-import '../util/todo_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -76,39 +76,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildTasksLayout() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 30.0),
-          child: Text(
-            "My Tasks",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              letterSpacing: 1.2,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 200,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: db.toDoList.length,
-            itemBuilder: (context, index) {
-              return ToDoTile(
-                taskTitle: db.toDoList[index][0],
-                taskContent: db.toDoList[index][1],
-                taskDateTime: db.toDoList[index][2] ?? DateTime.now(),
-                taskCompleted: db.toDoList[index][3],
-                onChanged: (value) => checkBoxChanged(value, index),
-                deleteFunction: (context) => deleteTask(index),
-              );
-            },
-          ),
-        ),
-      ],
+    return TilesLayout(
+      db: db,
+      onChanged: checkBoxChanged,
+      onDelete: deleteTask,
     );
   }
 
